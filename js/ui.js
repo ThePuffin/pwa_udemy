@@ -1,9 +1,11 @@
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
+  var fab = document.querySelectorAll('.fixed-action-btn');
     var sidenav = document.querySelectorAll('.sidenav');
         var modals = document.querySelectorAll('.modal');
 
-    var instances = M.Sidenav.init(sidenav);
+     M.Sidenav.init(sidenav);
     M.Modal.init(modals)
+   M.FloatingActionButton.init(fab);
   });
 
  
