@@ -44,7 +44,7 @@
 
 
   <!-- Modal Structure -->
-  <div id="add_contact_modal" class="modal add-contact form">
+  <div id="add_contact_modal" class="modal add-contact">
     <div class="modal-content">
       <h4>New contact</h4>
       <form action="">
@@ -93,11 +93,11 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore;
+  const db = firebase.firestore();
 </script>
     <script src='./js/app.js'></script>
-    <script src="./js/ui.js"></script>
     <script src="./js/db.js"></script>
+    <script src="./js/ui.js"></script>
 </body>
 
 </html>
