@@ -1,103 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#9e2123" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="theme-color" content="#9e2123" />
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="manifest" href="/manif.json" />
+    <link rel="apple-touch-icon" href="./images/icons/icons-512.png" />
+    <title>My contact</title>
+  </head>
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="manifest" href="/manif.json">
-  <link rel="apple-touch-icon" href="./images/icons/icons-512.png">
-  <title>My contact</title>
-</head>
+  <body>
+    <nav class="nav-extended">
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">My contact</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/pages/favorites.html">Favorites</a></li>
+          <li><a href="/pages/about.html">About</a></li>
+        </ul>
+      </div>
+    </nav>
 
-<body>
-  <nav class="nav-extended">
-    <div class="nav-wrapper container">
-      <a href="/" class="brand-logo">My contact</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/pages/favorites.html">Favorites</a></li>
-        <li><a href="/pages/about.html">About</a></li>
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="/">Home</a></li>
+      <li><a href="/pages/favorites.html">Favorites</a></li>
+      <li><a href="/pages/about.html">About</a></li>
+    </ul>
+
+    <div class="container">
+      <ul class="contacts collection with-header">
+        <li class="collection-header">
+          <h4>Contacts</h4>
+        </li>
       </ul>
     </div>
-  </nav>
 
-  <ul class="sidenav" id="mobile-demo">
-    <li><a href="/">Home</a></li>
-    <li><a href="/pages/favorites.html">Favorites</a></li>
-    <li><a href="/pages/about.html">About</a></li>
-  </ul>
-
-  <div class="container">
-    <ul class="contacts collection with-header">
-      <li class="collection-header">
-        <h4>Contacts</h4>
-      </li>
-    </ul>
-  </div>
-
-
-  <!-- Modal Structure -->
-  <div id="add_contact_modal" class="modal add-contact">
-    <div class="modal-content">
-      <h4>New contact</h4>
-      <form action="">
-        <input type="text" name="name" placeholder="person name">
-        <input type="number" name="phone" placeholder="phone number">
-        <button class="btn">Add</button>
-        <p class="error"></p>
+    <!-- Modal Structure -->
+    <div id="add_contact_modal" class="modal add-contact">
+      <div class="modal-content">
+        <h4>New Contact</h4>
+        <form action="">
+          <input type="text" name="name" placeholder="person name" />
+          <input type="number" name="phone" placeholder="phone number" />
+          <button class="btn">Add</button>
+          <p class="error"></p>
+        </form>
+      </div>
     </div>
-  </div>
-
 
     <div id="edit_contact_modal" class="modal edit-contact">
       <div class="modal-content">
         <h4>Edit contact</h4>
         <form action="">
-          <input type="text" name="name" placeholder="person name">
-          <input type="number" name="phone" placeholder="phone number">
+          <input type="text" name="name" placeholder="person name" />
+          <input type="number" name="phone" placeholder="phone number" />
           <button class="btn">Update</button>
           <p class="error"></p>
-
         </form>
       </div>
     </div>
 
-<div class="fixed-action-btn">
-  <a class="btn-floating btn-large red modal-trigger" href="#add_contact_modal">
-    <i class="large material-icons">mode_edit</i>
-  </a>
-</div>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red modal-trigger" href="#add_contact_modal">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyB4WxmvtYYNlJ1__Xw_dK-vMAjegURjsWc",
-    authDomain: "contact-ebe3b.firebaseapp.com",
-    projectId: "contact-ebe3b",
-    storageBucket: "contact-ebe3b.appspot.com",
-    messagingSenderId: "314041552746",
-    appId: "1:314041552746:web:7742b2443d24440b165f13"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-</script>
-    <script src='./js/app.js'></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyB4WxmvtYYNlJ1__Xw_dK-vMAjegURjsWc",
+        authDomain: "contact-ebe3b.firebaseapp.com",
+        projectId: "contact-ebe3b",
+        storageBucket: "contact-ebe3b.appspot.com",
+        messagingSenderId: "314041552746",
+        appId: "1:314041552746:web:7742b2443d24440b165f13",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+    </script>
+    <script src="./js/app.js"></script>
     <script src="./js/db.js"></script>
     <script src="./js/ui.js"></script>
-</body>
-
+  </body>
 </html>
