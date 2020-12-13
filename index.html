@@ -44,7 +44,7 @@
 
 
   <!-- Modal Structure -->
-  <div id="add_contact_modal" class="modal add-contact">
+  <div id="add_contact_modal" class="modal add-contact form">
     <div class="modal-content">
       <h4>New contact</h4>
       <form action="">
@@ -70,12 +70,34 @@
     </div>
 
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large red">
+  <a class="btn-floating btn-large red modal-trigger" href="#add_contact_modal">
     <i class="large material-icons">mode_edit</i>
   </a>
 </div>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB4WxmvtYYNlJ1__Xw_dK-vMAjegURjsWc",
+    authDomain: "contact-ebe3b.firebaseapp.com",
+    projectId: "contact-ebe3b",
+    storageBucket: "contact-ebe3b.appspot.com",
+    messagingSenderId: "314041552746",
+    appId: "1:314041552746:web:7742b2443d24440b165f13"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore;
+</script>
     <script src='./js/app.js'></script>
     <script src="./js/ui.js"></script>
+    <script src="./js/db.js"></script>
 </body>
 
 </html>
