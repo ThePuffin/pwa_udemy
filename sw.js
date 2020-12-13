@@ -3,6 +3,7 @@ const dynamicCache = "dynamic-cache";
 const assets = [
   "/",
   "/index.html",
+  "/pages/fallback.html",
   "/js/ui.js",
   "/js/app.js",
   "/js/materialize.min.js",
@@ -29,16 +30,19 @@ self.addEventListener("activate", (e) => {
 //fecth events
 self.addEventListener("fetch", (e) => {
   e.respondWith(
-    caches.match(e.request).then((staticRes) => {
-      return (
-        staticRes ||
-        fetch(e.request).then((dynamicRes) => {
-          return caches.open(dynamicCache).then((cache) => {
-            cache.put(e.request.url, dynamicRes.clone());
-            return dynamicRes;
-          });
-        })
-      );
-    })
+    caches
+      .match(e.request)
+      .then((staticRes) => {
+        return (
+          staticRes ||
+          fetch(e.request).then((dynamicRes) => {
+            return caches.open(dynamicCache).then((cache) => {
+              cache.put(e.request.url, dynamicRes.clone());
+              return dynamicRes;
+            });
+          })
+        );
+      })
+      .catch(() => caches.match("/pages/fallback.html"))
   );
 });
