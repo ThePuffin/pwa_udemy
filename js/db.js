@@ -1,3 +1,11 @@
+db.enablePersistence().catch((err) => {
+  if (err.code == "failed-precondition") {
+    console.log("multiple tabs opened");
+  } else if (err.code == "unimplemented") {
+    console.log("browser not support");
+  }
+});
+
 const contactform = document.querySelector(".add-contact form");
 const addContactModal = document.querySelector("#add_contact_modal");
 contactform.addEventListener("submit", (e) => {
@@ -26,7 +34,16 @@ db.collection("contacts").onSnapshot((snapshot) => {
       renderContacts(change.doc.data(), change.doc.id);
     }
     if (change.type === "removed") {
-      console.log(`${change.doc.id} is removed`);
+      removeContact(change.doc.id);
     }
   });
+});
+
+const contactContainer = document.querySelector(".contacts");
+
+contactContainer.addEventListener("click", (e) => {
+  if (e.target.textContent === "delete_outline") {
+    const id = e.target.parentElement.getAttribute("data-id");
+    db.collection("contacts").doc(id).delete();
+  }
 });
