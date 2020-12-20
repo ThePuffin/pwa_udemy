@@ -8,6 +8,12 @@ db.enablePersistence().catch((err) => {
 
 const contactform = document.querySelector(".add-contact form");
 const addContactModal = document.querySelector("#add_contact_modal");
+
+const editform = document.querySelector(".edit-contact form");
+const editContactModal = document.querySelector("#edit_contact_modal");
+
+let updateId = null;
+
 contactform.addEventListener("submit", (e) => {
   e.preventDefault();
   const contact = {
@@ -28,6 +34,26 @@ contactform.addEventListener("submit", (e) => {
     });
 });
 
+editform.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const contact = {
+    name: editform.name.value,
+    phone: editform.phone.value,
+  };
+  db.collection("contacts")
+    .doc(updateId)
+    .update(contact)
+    .then(() => {
+      editform.reset();
+      var instance = M.Modal.getInstance(editContactModal);
+      instance.close();
+      editform.querySelector(".error").textContent = "";
+    })
+    .catch((err) => {
+      editform.querySelector(".error").textContent = err.message;
+    });
+});
+
 db.collection("contacts").onSnapshot((snapshot) => {
   snapshot.docChanges().forEach((change) => {
     if (change.type === "added") {
@@ -36,14 +62,35 @@ db.collection("contacts").onSnapshot((snapshot) => {
     if (change.type === "removed") {
       removeContact(change.doc.id);
     }
+    if (change.type === "modified") {
+      updateContact(change.doc.data(), change.doc.id);
+    }
   });
 });
 
 const contactContainer = document.querySelector(".contacts");
 
 contactContainer.addEventListener("click", (e) => {
+  const id = e.target.parentElement.getAttribute("data-id");
   if (e.target.textContent === "delete_outline") {
-    const id = e.target.parentElement.getAttribute("data-id");
     db.collection("contacts").doc(id).delete();
+  }
+  if (e.target.textContent === "edit") {
+    updateId = id;
+    const contact = document.querySelector(`.contact[data-id='${updateId}']`);
+    const name = contact.querySelector(".name").innerHTML;
+    const phone = contact.querySelector(".phone").innerHTML;
+
+    editform.name.value = name;
+    editform.phone.value = phone;
+  }
+  if (e.target.textContent === "star_border") {
+    contact = { favorite: true };
+    db.collection("contacts").doc(id).update(contact);
+  }
+
+  if (e.target.textContent === "star") {
+    contact = { favorite: false };
+    db.collection("contacts").doc(id).update(contact);
   }
 });

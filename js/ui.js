@@ -16,9 +16,9 @@ const renderContacts = (data, id) => {
     Name: <span class="name">${data.name}</span>
     <p>Phone number :<span class="phone">${data.phone}</span></p>
 
-    <div href="#!" class="secondary-content" data-id=${id} style= "align:right;">
+    <div href="#!" class="secondary-content" data-id=${id} style= "text-align:right;">
       <i class="material-icons modal-trigger" style='cursor:pointer' href='#edit_contact_modal'>edit</i>
-      <i class="material-icons" style='cursor:pointer'>${data.favorite ? "star" : "star_border"}</i>
+      <i class="material-icons fav" style='cursor:pointer'>${data.favorite ? "star" : "star_border"}</i>
       <i class="material-icons" style='cursor:pointer'>delete_outline</i>
     </div>
   </li>`;
@@ -28,4 +28,13 @@ const renderContacts = (data, id) => {
 const removeContact = (id) => {
   const contact = document.querySelector(`.contact[data-id=${id}]`);
   contact.remove();
+};
+
+const updateContact = (data, id) => {
+  console.log(data);
+  const contact = document.querySelector(`.contact[data-id='${id}']`);
+  contact.querySelector(".name").innerHTML = data.name;
+  contact.querySelector(".phone").innerHTML = data.phone;
+  const textFavorite = data.favorite ? "star" : "star_border";
+  contact.querySelector(".fav").textContent = textFavorite;
 };
