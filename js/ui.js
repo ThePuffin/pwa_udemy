@@ -1,11 +1,26 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var fab = document.querySelectorAll('.fixed-action-btn');
-    var sidenav = document.querySelectorAll('.sidenav');
-        var modals = document.querySelectorAll('.modal');
+const contacts = document.querySelector(".contacts");
 
-     M.Sidenav.init(sidenav);
-    M.Modal.init(modals)
-   M.FloatingActionButton.init(fab);
-  });
+document.addEventListener("DOMContentLoaded", function () {
+  var fab = document.querySelectorAll(".fixed-action-btn");
+  var sidenav = document.querySelectorAll(".sidenav");
+  var modals = document.querySelectorAll(".modal");
 
- 
+  M.Sidenav.init(sidenav);
+  M.Modal.init(modals);
+  M.FloatingActionButton.init(fab);
+});
+
+const renderContacts = (data, id) => {
+  const html = `    
+  <li class="collection-item avatar" data-id=${id}>
+    Name: <span class="name">${data.name}</span>
+    <p>Phone number :<span class="phone">${data.phone}</span></p>
+
+    <div href="#!" class="secondary-content" data-id=${id} style= "align:right;">
+      <i class="material-icons modal-trigger" style='cursor:pointer' href='#edit_contact_modal'>edit</i>
+      <i class="material-icons" style='cursor:pointer'>${data.favorite ? "star" : "star_border"}</i>
+      <i class="material-icons" style='cursor:pointer'>delete_outline</i>
+    </div>
+  </li>`;
+  contacts.innerHTML += html;
+};

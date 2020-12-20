@@ -19,3 +19,14 @@ contactform.addEventListener("submit", (e) => {
       contactform.querySelector(".error").textContent = err.message;
     });
 });
+
+db.collection("contacts").onSnapshot((snapshot) => {
+  snapshot.docChanges().forEach((change) => {
+    if (change.type === "added") {
+      renderContacts(change.doc.data(), change.doc.id);
+    }
+    if (change.type === "removed") {
+      console.log(`${change.doc.id} is removed`);
+    }
+  });
+});
