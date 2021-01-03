@@ -6,6 +6,7 @@ const assets = [
   "/pages/fallback.html",
   "/js/ui.js",
   "/js/app.js",
+  "/js/users.js",
   "/js/materialize.min.js",
   "/css/materialize.min.css",
   "/css",
@@ -37,25 +38,41 @@ self.addEventListener("activate", (e) => {
   console.log("sw is activated");
 });
 
-//fecth events
+//network first
 self.addEventListener("fetch", (e) => {
-  if (e.request.url.indexOf("firestore.googleapis.com") === -1) {
-    e.respondWith(
-      caches
-        .match(e.request)
-        .then((staticRes) => {
-          return (
-            staticRes ||
-            fetch(e.request).then((dynamicRes) => {
-              return caches.open(dynamicCache).then((cache) => {
-                cache.put(e.request.url, dynamicRes.clone());
-                limitNumCache(dynamicCache, 2);
-                return dynamicRes;
-              });
-            })
-          );
-        })
-        .catch(() => caches.match("/pages/fallback.html"))
-    );
-  }
+  e.respondWith(
+    fetch(e.request)
+      .then((cache) => {
+        cache.put(e.request.url, fetchRes.clone());
+        return fetchRes;
+      })
+      .catch(() => {
+        return caches.match(e.request);
+      })
+  );
 });
+
+//fetch events
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    caches
+      .match(e.request)
+      .then((staticRes) => {
+        return (
+          staticRes ||
+          fetch(e.request).then((dynamicRes) => {
+            return caches.open(dynamicCache).then((cache) => {
+              cache.put(e.request.url, dynamicRes.clone());
+              return dynamicRes;
+            });
+          })
+        );
+      })
+      .catch(() => caches.match("/pages/fallback.html"))
+  );
+});
+
+//cache only
+// self.addEventListener("fetch", (e) => {
+//   e.respondWith(caches.match(e.request));
+// });

@@ -13,14 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
 const renderContacts = (data, id) => {
   const html = `    
   <li class="collection-item avatar contact" data-id=${id}>
-    Name: <span class="name">${data.name}</span>
-    <p>Phone number :<span class="phone">${data.phone}</span></p>
-
-    <div href="#!" class="secondary-content" data-id=${id} style= "text-align:right;">
-      <i class="material-icons modal-trigger" style='cursor:pointer' href='#edit_contact_modal'>edit</i>
-      <i class="material-icons fav" style='cursor:pointer'>${data.favorite ? "star" : "star_border"}</i>
-      <i class="material-icons" style='cursor:pointer'>delete_outline</i>
-    </div>
+  <img src='${data.avatar}' alt='' class='circle'>
+    Name: <span class="name">${data.first_name} ${data.last_name}</span>
+    <p>Email :<span class="email">${data.email}</span></p>
   </li>`;
   contacts.innerHTML += html;
 };

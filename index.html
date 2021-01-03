@@ -21,7 +21,6 @@
         <a href="/" class="brand-logo">My contact</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="/pages/favorites.html">Favorites</a></li>
           <li><a href="/pages/about.html">About</a></li>
         </ul>
       </div>
@@ -29,7 +28,6 @@
 
     <ul class="sidenav" id="mobile-demo">
       <li><a href="/">Home</a></li>
-      <li><a href="/pages/favorites.html">Favorites</a></li>
       <li><a href="/pages/about.html">About</a></li>
     </ul>
 
@@ -71,29 +69,9 @@
         <i class="large material-icons">mode_edit</i>
       </a>
     </div>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyB4WxmvtYYNlJ1__Xw_dK-vMAjegURjsWc",
-        authDomain: "contact-ebe3b.firebaseapp.com",
-        projectId: "contact-ebe3b",
-        storageBucket: "contact-ebe3b.appspot.com",
-        messagingSenderId: "314041552746",
-        appId: "1:314041552746:web:7742b2443d24440b165f13",
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
-    </script>
     <script src="./js/app.js"></script>
-    <script src="./js/db.js"></script>
     <script src="./js/ui.js"></script>
+    <script src="./js/users.js"></script>
   </body>
 </html>
